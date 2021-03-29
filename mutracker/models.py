@@ -23,6 +23,8 @@ class Release(BaseModel):
   status_listened: bool
   # If listened, the date in which the user listened to the album
   listened_date: datetime
+  # Notes on the release, whatever the user might want to write
+  notes: str
 
 class ListOptions(Enum):
   all = 'all'

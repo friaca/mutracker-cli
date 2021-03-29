@@ -30,6 +30,9 @@ Release:
 
   # If listened, the date in which the user listened to the album
   listened_date: datetime
+
+  # Notes on the release, whatever the user might want to write
+  notes: str
 ```
 # Tables
 *SQLite specific due to data type constraints*

@@ -40,10 +40,10 @@ Release:
 | INTEGER | TEXT | TEXT | TEXT | INTEGER | INTEGER | TEXT |
 
 
-| genre | |
-| - | - |
-| id | id_release |
-| INTEGER | INTEGER |
+| genre | | |
+| - | - | - |
+| id | id_release | name |
+| INTEGER | INTEGER | TEXT |
 
 # CLI
 

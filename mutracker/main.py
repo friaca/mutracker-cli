@@ -1,9 +1,13 @@
-print("""
-                    __                  __            
-   ____ ___  __  __/ /__________ ______/ /_____  _____
-  / __ `__ \/ / / / __/ ___/ __ `/ ___/ //_/ _ \/ ___/
- / / / / / / /_/ / /_/ /  / /_/ / /__/ ,< /  __/ /    
-/_/ /_/ /_/\__,_/\__/_/   \__,_/\___/_/|_|\___/_/     
-""")
-
-
+def main(args):
+  if args.list:
+    pass
+  elif args.find:
+    pass
+  elif args.add:
+    pass
+  elif args.update:
+    pass
+  elif args.delete:
+    pass
+  
+  pass

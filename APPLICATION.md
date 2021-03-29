@@ -34,10 +34,10 @@ Release:
 # Tables
 *SQLite specific due to data type constraints*
 
-| release |  |            |        |      |                 |               | 
-|  -  |   -  | -          | -      | -    | -               | -             | 
-| id  | name | dt_release | artist | type | status_listened | listened_date | 
-| INTEGER | TEXT | TEXT | TEXT | INTEGER | INTEGER | TEXT |
+| release |  |            |        |      |                 |               |  |
+|  -  |   -  | -          | -      | -    | -               | -             | -|
+| id  | name | dt_release | artist | type | status_listened | listened_date | notes |
+| INTEGER | TEXT | TEXT | TEXT | INTEGER | INTEGER | TEXT | TEXT|
 
 
 | genre | | |

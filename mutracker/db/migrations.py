@@ -12,7 +12,8 @@ def run_migrations(db_path: str):
     dt_release TEXT NOT NULL,
     type INTEGER NOT NULL,
     status_listened INTEGER NOT NULL, 
-    listened_date TEXT
+    listened_date TEXT,
+    notes TEXT
   )""")
 
   # Release's type table

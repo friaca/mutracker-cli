@@ -1,6 +1,6 @@
 import argparse
 from mutracker.main import main
-from mutracker.utils.cli import ListOptions
+from mutracker.models import ListOptions
 
 def entry():
   print("""

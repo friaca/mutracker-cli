@@ -25,13 +25,3 @@ class Release(BaseModel):
   listened_date: datetime
   # Notes on the release, whatever the user might want to write
   notes: str
-
-class ListOptions(Enum):
-  all = 'all'
-  listened = 'listened'
-  pending = 'pending'
-  # TODO: Implement query-like prop, so the user can retrieve custom lists
-  # query = 'query'
-
-  def __str__(self):
-    return self.value

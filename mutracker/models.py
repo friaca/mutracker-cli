@@ -26,10 +26,11 @@ class Release(BaseModel):
   # Notes on the release, whatever the user might want to write
   notes: str
 
-  def __init__(self, id, name, artist, dt_release, type, status_listened, dt_listened, notes):
-    self.id = id if id is not None else 0
+  def __init__(self, id, name, artist, dt_release, type, status_listened, dt_listened, notes, genres = None):
+    self.id = id or 0
     self.name = name
     self.artist = artist
+    self.genres = genres or []
     self.dt_release = dt_release
     self.type = self.parse_type(type)
     self.status_listened = self.parse_bool(status_listened)

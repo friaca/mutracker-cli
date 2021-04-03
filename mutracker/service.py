@@ -1,14 +1,14 @@
 from typing import List
 from .models import Release
-from .repository import Repository
+from .repository import ReleaseRepository
 
-class Service():
+class ReleaseService():
   def __init__(self):
-    self._repository = Repository()
-    pass
+    self._repository = ReleaseRepository()
 
   def list_release(self, argv) -> List[Release] or None:
     results = None
+
     if argv in ['all', 'listened', 'pending']:
       results = self._repository.list(argv)
     elif argv == 'query':

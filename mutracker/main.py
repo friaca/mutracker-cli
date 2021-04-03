@@ -1,6 +1,10 @@
+from .ui import Ui 
+
 def main(args):
+  ui = Ui()
+  
   if args.list:
-    pass
+    ui.list_releases(args.list)
   elif args.find:
     pass
   elif args.add:

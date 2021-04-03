@@ -1,7 +1,8 @@
+from .models import Release
 from .database import Database
 from . import config
 
-class Repository():
+class ReleaseRepository():
   def __init__(self):
     self._database = Database(config['DB_PATH'])
 
@@ -13,4 +14,4 @@ class Repository():
     elif which == 'pending':
       sql += 'WHERE status_listened = 0'
 
-    return self._database.query(sql)
+    return map(lambda r: Release(*r), self._database.query(sql))

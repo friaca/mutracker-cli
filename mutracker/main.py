@@ -6,7 +6,7 @@ def main(args):
   if args.list:
     ui.list_releases(args.list)
   elif args.find:
-    pass
+    ui.find_releases(args.find)
   elif args.add:
     pass
   elif args.update:

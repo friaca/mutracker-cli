@@ -17,8 +17,12 @@ class ReleaseService():
       print(f'Option {argv} not valid for --list')
       sys.exit(1)
 
-  def find_release(argv):
-    pass
+  def find_release(self, argv: str or int):
+    try:
+      value = int(argv)
+      return self._repository.find(['id'], value)
+    except ValueError:
+      return self._repository.find(['name', 'artist'], argv)
 
   def add_release(argv):
     pass

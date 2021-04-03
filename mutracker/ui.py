@@ -32,11 +32,15 @@ class Ui():
   def display_table_releases(self, releases: List[Release]):
     self.display_table(
       {'title': 'Releases'}, 
-      ['ID', 'Name', 'Artist', 'Release date', 'Type', 'Listened', 'Listened date', 'Notes'], 
-      {'justify': 'left', 'no_wrap': True},
+      ['ID', 'Name', 'Artist', 'Genres', 'Release date', 'Type', 'Listened', 'Listened date', 'Notes'], 
+      {'justify': 'left', 'no_wrap': False},
       map(lambda r: r.get_renderable(), releases)
     )
 
   def list_releases(self, which: str):
     releases = self._service.list_release(which)
+    self.display_table_releases(releases)
+
+  def find_releases(self, identifier: str or int):
+    releases = self._service.find_release(identifier)
     self.display_table_releases(releases)

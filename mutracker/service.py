@@ -1,3 +1,4 @@
+import sys
 from typing import List
 from .models import Release
 from .repository import ReleaseRepository
@@ -10,10 +11,11 @@ class ReleaseService():
     if argv in ['all', 'listened', 'pending']:
       return self._repository.list(argv)
     elif argv == 'query':
-      pass
+      print('Query is not yet supported')
+      sys.exit(1)
     else:
       print(f'Option {argv} not valid for --list')
-      return
+      sys.exit(1)
 
   def find_release(argv):
     pass

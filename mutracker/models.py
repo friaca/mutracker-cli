@@ -1,6 +1,6 @@
 from enum import Enum
 from datetime import datetime
-from typing import List
+from typing import List, Literal
 
 class BaseModel:
   # Database UID
@@ -18,7 +18,7 @@ class Release(BaseModel):
   # Release genres
   genres: List[str]
   # Release type (Album or EP)
-  type: str
+  type: Literal['Album', 'EP', '?']
   # Wheter the user has listened to the release or not
   status_listened: bool
   # If listened, the date in which the user listened to the album
@@ -31,10 +31,21 @@ class Release(BaseModel):
     self.name = name
     self.artist = artist
     self.dt_release = dt_release
-    self.type = type
-    self.status_listened = status_listened
+    self.type = self.parse_type(type)
+    self.status_listened = self.parse_bool(status_listened)
     self.dt_listened = dt_listened
     self.notes = notes
+
+  def parse_type(self, type: int):
+    if type == 1:
+      return 'Album'
+    elif type == 2:
+      return 'EP'
+    
+    return '?'
+
+  def parse_bool(self, value: bool):
+    return 'Yes' if value == 1 else 'No'
 
   def get_renderable(self):
     return map(lambda r: str(r), self.__dict__.values())

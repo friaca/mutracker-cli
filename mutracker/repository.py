@@ -7,11 +7,12 @@ class ReleaseRepository():
     self._database = Database(config['DB_PATH'])
 
   def list(self, which: str):
-    sql = 'SELECT * FROM release'
+    sql = ['SELECT * FROM release']
 
     if which == 'listened':
-      sql += 'WHERE status_listened = 1'
+      sql += ['WHERE status_listened = 1']
     elif which == 'pending':
-      sql += 'WHERE status_listened = 0'
+      sql += ['WHERE status_listened = 0']
+    
 
-    return map(lambda r: Release(*r), self._database.query(sql))
+    return map(lambda r: Release(*r), self._database.query(' '.join(sql)))

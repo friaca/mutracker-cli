@@ -1,3 +1,4 @@
+from .models import Release
 from typing import Dict, List
 from rich import print as rprint
 from rich.console import Console
@@ -9,7 +10,7 @@ class Ui():
     self._console = Console()
     self._service = ReleaseService()
   
-  def ask(self, question):
+  def ask(self, question: str):
     answer = None
 
     while answer == None:
@@ -28,12 +29,14 @@ class Ui():
 
     self._console.print(table)
 
-  def list_releases(self, which):
-    releases = self._service.list_release(which)
-
+  def display_table_releases(self, releases: List[Release]):
     self.display_table(
       {'title': 'Releases'}, 
       ['ID', 'Name', 'Artist', 'Release date', 'Type', 'Listened', 'Listened date', 'Notes'], 
       {'justify': 'left', 'no_wrap': True},
       map(lambda r: r.get_renderable(), releases)
     )
+
+  def list_releases(self, which: str):
+    releases = self._service.list_release(which)
+    self.display_table_releases(releases)

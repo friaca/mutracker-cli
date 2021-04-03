@@ -54,7 +54,7 @@ def run_migrations(db_path: str):
     dt_release TEXT NOT NULL,
     type INTEGER NOT NULL,
     status_listened INTEGER NOT NULL, 
-    listened_date TEXT,
+    dt_listened TEXT,
     notes TEXT
   )""")
 
@@ -80,7 +80,7 @@ def run_migrations(db_path: str):
 def insert_mock_data(db_path: str):
   db = Database(db_path)
 
-  db.execute("""INSERT INTO release (name, dt_release, artist, type, status_listened, listened_date) 
+  db.execute("""INSERT INTO release (name, dt_release, artist, type, status_listened, dt_listened) 
     VALUES ('We Will Always Love You', '11-12-2020', 'The Avalanches', 1, 0, NULL),
     ('The Piper at the Gates of Dawn', '21-05-1967', 'Pink Floyd', 1, 0, NULL),
     ('무너지기 (Crumbling)', '31-07-2018', '공중도둑 [Mid-Air Thief]', 1, 1, NULL)

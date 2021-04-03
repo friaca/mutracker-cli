@@ -29,7 +29,7 @@ Release:
   status_listened: bool
 
   # If listened, the date in which the user listened to the album
-  listened_date: datetime
+  dt_listened: datetime
 
   # Notes on the release, whatever the user might want to write
   notes: str
@@ -39,7 +39,7 @@ Release:
 
 | release |  |            |        |      |                 |               |  |
 |  -  |   -  | -          | -      | -    | -               | -             | -|
-| id  | name | dt_release | artist | type | status_listened | listened_date | notes |
+| id  | name | dt_release | artist | type | status_listened | dt_listened | notes |
 | INTEGER | TEXT | TEXT | TEXT | INTEGER | INTEGER | TEXT | TEXT|
 
 

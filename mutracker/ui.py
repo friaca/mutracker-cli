@@ -17,7 +17,7 @@ class Ui():
     
     return answer
 
-  def display_table(self, table_opts: Dict[str, str], column_names: List[str], column_opts: Dict[str, str], rows: List[str]):
+  def display_table(self, table_opts: Dict[str, str], column_names: List[str], column_opts: Dict[str, str], rows: List[List[str]]):
     table = Table(**table_opts)
 
     for column_name in column_names:

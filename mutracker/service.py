@@ -27,7 +27,7 @@ class ReleaseService():
       sys.exit(1)
 
   def find_release_by_id(self, id: int):
-    return self._repository.find(['id'], id)
+    return self._repository.find_by_id(id)
 
   def find_release_by_name(self, name: str):
     return self._repository.find(['name'], name)

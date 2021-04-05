@@ -38,6 +38,10 @@ class ReleaseRepository():
     
     return releases
 
+  def find_by_id(self, id: int):
+    sql = 'SELECT * FROM release WHERE id = ?'
+    return self.map_release(self._database.query(sql, (id,)))
+
   def find_by_genre(self, genre: str):
     sql = """SELECT * FROM release WHERE id IN 
       (SELECT id_release FROM genre WHERE name LIKE ? OR name LIKE ?)"""

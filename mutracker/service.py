@@ -23,7 +23,7 @@ class ReleaseService():
       print('Query is not yet supported')
       sys.exit(1)
     else:
-      print(f'Option {argv} not valid for --list')
+      print(f'Option "{argv}" not valid for --list')
       sys.exit(1)
 
   def find_release_by_id(self, id: int):

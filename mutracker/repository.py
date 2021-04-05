@@ -1,4 +1,4 @@
-from .utils import join_query, or_like_clause
+from .utils import join, or_like_clause
 from typing import List
 from .models import Release
 from .database import Database
@@ -28,11 +28,11 @@ class ReleaseRepository():
     elif which == 'pending':
       sql += ['WHERE status_listened = 0']
     
-    return self.map_release(self._database.query(join_query(sql)))
+    return self.map_release(self._database.query(join(sql)))
 
   def find(self, columns: List[str], value: str):
     or_like = or_like_clause(columns)
-    sql = join_query(['SELECT * FROM release', 'WHERE', or_like])
+    sql = join(['SELECT * FROM release', 'WHERE', or_like])
     releases = self.map_release(self._database.query(sql, (f"%{value}%",) * len(columns)))
     
     return releases

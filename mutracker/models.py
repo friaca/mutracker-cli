@@ -33,7 +33,7 @@ class Release(BaseModel):
     self.genres = genres or []
     self.dt_release = dt_release
     self.type = self.parse_type(type)
-    self.status_listened = self.parse_bool(status_listened)
+    self.status_listened = status_listened
     self.dt_listened = dt_listened
     self.notes = notes
 
@@ -45,8 +45,16 @@ class Release(BaseModel):
     
     return '?'
 
-  def parse_bool(self, value: bool):
-    return 'Yes' if value == 1 else 'No'
-
   def get_renderable(self):
-    return map(lambda r: str(r), self.__dict__.values())
+    parse_bool = lambda val: 'Yes' if val == 1 else 'No'
+    parse_array = lambda arr: ', '.join(arr)
+
+    def mapper(entry):
+      if entry[0] in ['status_listened']:
+        return parse_bool(entry[1])
+      if entry[0] in ['genres']:
+        return parse_array(entry[1])
+
+      return str(entry[1])
+
+    return map(mapper, self.__dict__.items())

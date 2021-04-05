@@ -37,3 +37,11 @@ class ReleaseRepository():
     releases = self.map_release(self._database.query(sql, (f"%{value}%",) * len(columns)))
     
     return releases
+
+  def find_by_genre(self, genre: str):
+    sql = """SELECT * FROM release WHERE id IN 
+      (SELECT id_release FROM genre WHERE name LIKE ? OR name LIKE ?)"""
+    
+    releases = self.map_release(self._database.query(sql, (f"%{genre}%",) * 2))
+
+    return releases

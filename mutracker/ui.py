@@ -42,6 +42,6 @@ class Ui():
     releases = self._service.list_release(which)
     self.display_table_releases(releases)
 
-  def find_releases(self, identifier: str or int):
+  def find_releases(self, identifier: List[str]):
     releases = self._service.find_release(identifier)
     self.display_table_releases(releases)

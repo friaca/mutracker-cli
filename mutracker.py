@@ -12,7 +12,7 @@ def entry():
 
   parser = argparse.ArgumentParser(description="Mutracker | Music Tracking")
   args_group = parser.add_mutually_exclusive_group()
-  args_group.add_argument('-l', '--list')
+  args_group.add_argument('-l', '--list', nargs='?', const='all')
   args_group.add_argument('-f', '--find', nargs='+')
   args_group.add_argument('-a', '--add', nargs='+')
   args_group.add_argument('-d', '--delete')

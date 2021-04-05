@@ -17,7 +17,7 @@ class ReleaseRepository():
     return releases
 
   def get_genres(self, id):
-    sql = f'SELECT name FROM genre WHERE id_release = ?'
+    sql = 'SELECT name FROM genre WHERE id_release = ?'
     return list(map(lambda name_tuple: name_tuple[0], self._database.query(sql, (id,))))
 
   def list(self, which: str):

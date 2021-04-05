@@ -1,13 +1,13 @@
 from .models import Release
 from typing import Dict, List
-from rich import print as rprint
+from rich import box
 from rich.console import Console
 from rich.table import Table
 from .service import ReleaseService
 
 class Ui():
   def __init__(self):
-    self._console = Console()
+    self._console = Console(color_system="auto")
     self._service = ReleaseService()
   
   def ask(self, question: str):
@@ -24,14 +24,15 @@ class Ui():
     for column_name in column_names:
       table.add_column(column_name, **column_opts)
 
-    for row in rows:
-      table.add_row(*row)
+    for index, row in enumerate(rows):
+      styles = ["color(12)", "color(15)"]
+      table.add_row(*row, style=styles[index % 2])
 
     self._console.print(table)
 
   def display_table_releases(self, releases: List[Release]):
     self.display_table(
-      {'title': 'Releases'}, 
+      {'box': box.SIMPLE_HEAD, 'show_lines': True}, 
       ['ID', 'Name', 'Artist', 'Genres', 'Release date', 'Type', 'Listened', 'Listened date', 'Notes'], 
       {'justify': 'left', 'no_wrap': False},
       map(lambda r: r.get_renderable(), releases)

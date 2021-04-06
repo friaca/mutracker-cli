@@ -31,10 +31,10 @@ class Release(BaseModel):
     self.name = name
     self.artist = artist
     self.genres = genres or []
-    self.dt_release = dt_release
+    self.dt_release = self.parse_date(dt_release)
     self.type = self.parse_type(type)
     self.status_listened = status_listened
-    self.dt_listened = dt_listened
+    self.dt_listened = self.parse_date(dt_listened)
     self.notes = notes
 
   def parse_type(self, type: int):
@@ -45,15 +45,27 @@ class Release(BaseModel):
     
     return '?'
 
+  def parse_date(self, date: str):
+    if date is None: 
+      return None
+    else:
+      # '31-12-2020' -> [2020, 12, 31]
+      date_to_int_list = map(lambda part: int(part), date.split('-')[::-1])
+
+      return datetime(*date_to_int_list)
+
   def get_renderable(self):
     parse_bool = lambda val: 'Yes' if val == 1 else 'No'
     parse_array = lambda arr: ', '.join(arr)
+    format_date = lambda date: date.strftime("%d/%m/%Y")
 
     def mapper(entry):
       if entry[0] in ['status_listened']:
         return parse_bool(entry[1])
       if entry[0] in ['genres']:
         return parse_array(entry[1])
+      if entry[0] in ['dt_release', 'dt_listened'] and entry[1] is not None:
+        return format_date(entry[1])
 
       return str(entry[1])
 

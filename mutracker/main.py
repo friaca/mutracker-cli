@@ -9,14 +9,14 @@ class ArgsFind():
     self.identifier = id or name or artist
 
 class ArgsAdd():
-  def __init__(self, name=None, artist=None, genres=None, date_release=None, type=None, listened=None, date_listened=None, notes=None, **kwargs):
+  def __init__(self, name=None, artist=None, genres=None, dt_release=None, type=None, listened=None, dt_listened=None, notes=None, **kwargs):
     self.name = name
     self.artist = artist
-    self.genres = ','.split(genres) if ',' in genres else genres
-    self.date_release = date_release
-    self.type = type
+    self.genres = genres.split(',') if genres is not None and ',' in genres else [genres]
+    self.dt_release = dt_release
+    self.type = {'album': 1,'ep': 2}[type]
     self.listened = listened
-    self.date_listened = date_listened
+    self.dt_listened = dt_listened
     self.notes = notes
 
 def main(args):

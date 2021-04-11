@@ -38,10 +38,14 @@ class Ui():
       map(lambda r: r.get_renderable(), releases)
     )
 
-  def list_releases(self, which: str):
-    releases = self._service.list_release(which)
+  def list_releases(self, where: str):
+    releases = self._service.list_release(where)
     self.display_table_releases(releases)
 
   def find_releases(self, identifier: List[str]):
     releases = self._service.find_release(identifier)
     self.display_table_releases(releases)
+
+  def add_release(self, pseudo_release: Release):
+    
+    pass

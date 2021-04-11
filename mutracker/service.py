@@ -16,14 +16,14 @@ class ReleaseService():
       column, *search_terms = argv
       return column, ' '.join(search_terms)
 
-  def list_release(self, argv) -> List[Release] or None:
-    if argv in ['all', 'listened', 'pending']:
-      return self._repository.list(argv)
-    elif argv == 'query':
+  def list_release(self, where) -> List[Release] or None:
+    if where in ['all', 'listened', 'pending']:
+      return self._repository.list(where)
+    elif where == 'query':
       print('Query is not yet supported')
       sys.exit(1)
     else:
-      print(f'Option "{argv}" not valid for --list')
+      print(f'Option "{where}" not valid for --list')
       sys.exit(1)
 
   def find_release_by_id(self, id: int):
@@ -41,8 +41,8 @@ class ReleaseService():
   def find_release_default(self, value: str):
     return self._repository.find(['name', 'artist'], ' '.join(value))
 
-  def find_release(self, argv: List[str] or str or int):
-    column, search_terms = self.get_column_and_search(argv)
+  def find_release(self, by: List[str] or str or int):
+    column, search_terms = self.get_column_and_search(by)
 
     COLUMN_MAP = {
       'id': self.find_release_by_id,

@@ -11,12 +11,30 @@ def entry():
   """)
 
   parser = argparse.ArgumentParser(description="Mutracker | Music Tracking")
-  args_group = parser.add_mutually_exclusive_group()
-  args_group.add_argument('-l', '--list', nargs='?', const='all')
-  args_group.add_argument('-f', '--find', nargs='+')
-  args_group.add_argument('-a', '--add', nargs='+')
-  args_group.add_argument('-d', '--delete')
-  args_group.add_argument('-u', '--update')
+  subparsers = parser.add_subparsers(dest='command')
+
+  list_parser = subparsers.add_parser('list')
+  list_parser.add_argument('--where', nargs='?', const='all', default='all')
+
+  find_parser = subparsers.add_parser('find')
+  find_group = find_parser.add_mutually_exclusive_group(required=True)
+  find_group.add_argument('-i', '--id')
+  find_group.add_argument('-n', '--name')
+  find_group.add_argument('-a', '--artist')
+
+  add_parser = subparsers.add_parser('add')
+  add_parser.add_argument('-n', '--name', required=True)
+  add_parser.add_argument('-a', '--artist', required=True)
+  add_parser.add_argument('-g', '--genres', nargs='?', default='')
+  add_parser.add_argument('-dr', '--date-release')
+  add_parser.add_argument('-t', '--type', choices=['album', 'ep'], default='album')
+  add_parser.add_argument('-l', '--listened')
+  add_parser.add_argument('-dl', '--date-listened')
+  add_parser.add_argument('-nt', '--notes')
+
+  # update_parser = subparsers.add_parser('update')
+
+  # delete_parser = subparsers.add_parser('delete')
 
   args = parser.parse_args()
 

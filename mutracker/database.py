@@ -46,6 +46,8 @@ class Database:
 def run_migrations(db_path: str):
   db = Database(db_path)
 
+  # TODO: Add dt_create column and set default value to NOW()
+  # Also fix the mock migrations to have ISO formatted dates
   # Releases table
   db.execute("""CREATE TABLE IF NOT EXISTS release (
     id INTEGER PRIMARY KEY,

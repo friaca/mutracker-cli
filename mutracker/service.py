@@ -54,8 +54,9 @@ class ReleaseService():
 
     return COLUMN_MAP[column](search_terms)
     
-  def add_release(argv):
-    pass
+  def add_release(self, pseudo_release: Release):
+    release = self._repository.add_release(pseudo_release)
+    return release
 
   def delete_release(argv):
     pass

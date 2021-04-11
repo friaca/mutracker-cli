@@ -1,5 +1,5 @@
-from .utils import join, or_like_clause
 from typing import List
+from .utils import join, or_like_clause, add_release_dict
 from .models import Release
 from .database import Database
 from . import config
@@ -48,3 +48,20 @@ class ReleaseRepository():
     releases = self.map_release(self._database.query(sql, (f"%{genre}%",) * 2))
 
     return releases
+
+  def add_release(self, pseudo_release: Release):
+    dict = add_release_dict(pseudo_release)
+    insert_release_query = f"INSERT INTO release ({join(dict['release'][0], ',')}) VALUES ({join(dict['release'][1], ',')})"
+    self._database.query(insert_release_query)
+
+    # Isso retorna uma tupla dentro de uma lista
+    id = self._database.query("SELECT last_insert_rowid()")[0][0]
+
+    if len(dict['genres']) > 0:
+      values_clause = join(list(map(lambda genre: f"('{genre.strip()}', {id})", dict['genres'])), ', ')
+      insert_genre_query = f"INSERT INTO genre (name, id_release) VALUES {values_clause}"
+      self._database.query(insert_genre_query)
+    
+    self._database.commit()
+
+    return self.find_by_id(id)

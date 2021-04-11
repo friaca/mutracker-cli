@@ -47,5 +47,5 @@ class Ui():
     self.display_table_releases(releases)
 
   def add_release(self, pseudo_release: Release):
-    
-    pass
+    release = self._service.add_release(pseudo_release)
+    self.display_table_releases(release)

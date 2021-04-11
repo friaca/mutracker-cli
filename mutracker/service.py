@@ -35,11 +35,11 @@ class ReleaseService():
   def find_release_by_artist(self, artist: str):
     return self._repository.find(['artist'], artist)
   
-  def find_release_default(self, value: str):
-    return self._repository.find(['name', 'artist'], ' '.join(value))
-
   def find_release_by_genre(self, genres: List[str]):
     return self._repository.find_by_genre(genres)
+
+  def find_release_default(self, value: str):
+    return self._repository.find(['name', 'artist'], ' '.join(value))
 
   def find_release(self, argv: List[str] or str or int):
     column, search_terms = self.get_column_and_search(argv)

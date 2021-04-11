@@ -51,9 +51,9 @@ def run_migrations(db_path: str):
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
     artist TEXT NOT NULL,
-    dt_release TEXT NOT NULL,
+    dt_release TEXT,
     type INTEGER NOT NULL,
-    status_listened INTEGER NOT NULL, 
+    status_listened INTEGER NOT NULL DEFAULT 0, 
     dt_listened TEXT,
     notes TEXT
   )""")

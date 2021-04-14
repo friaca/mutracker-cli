@@ -18,6 +18,7 @@ def add_release_dict(pseudo_release: Release):
   
   populated_fields = list(filter(lambda prop: prop[1] is not None, pseudo_release.__dict__.items()))
   columns = list(map(lambda entry: entry[0], populated_fields))
+  # TODO: Lidar com outros tipos de dado e não tratar tudo como string
   values = list(map(lambda entry: f"'{entry[1]}'", populated_fields))
 
   return { 'release': (columns, values), 'genres': genres }

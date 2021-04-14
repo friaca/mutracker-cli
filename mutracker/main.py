@@ -6,7 +6,16 @@ class ArgsList():
 
 class ArgsFind():
   def __init__(self, id=None, name=None, artist=None, **kwargs):
-    self.identifier = id or name or artist
+    self.identifier = self.set_identifier(id, name, artist)
+    self.search_terms = id or name or artist
+
+  def set_identifier(self, id, name, artist):
+    if id is not None:
+      return 'id'
+    elif name is not None:
+      return 'name'
+    elif artist is not None:
+      return 'artist'
 
 class ArgsAdd():
   def __init__(self, name=None, artist=None, genres=None, dt_release=None, type=None, listened=None, dt_listened=None, notes=None, **kwargs):
@@ -30,7 +39,7 @@ def main(args):
     ui.list_releases(list.where)
   elif args.command == 'find':
     find = ArgsFind(**vars(args))
-    ui.find_releases(find.identifier)
+    ui.find_releases(find.identifier, find.search_terms)
   elif args.command == 'add':
     add = ArgsAdd(**vars(args))
     ui.add_release(add)

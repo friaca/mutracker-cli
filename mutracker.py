@@ -18,9 +18,9 @@ def entry():
 
   find_parser = subparsers.add_parser('find')
   find_group = find_parser.add_mutually_exclusive_group(required=True)
-  find_group.add_argument('-i', '--id')
-  find_group.add_argument('-n', '--name')
-  find_group.add_argument('-a', '--artist')
+  find_group.add_argument('-i', '--id', nargs='+')
+  find_group.add_argument('-n', '--name', nargs='+')
+  find_group.add_argument('-a', '--artist', nargs='+')
 
   add_parser = subparsers.add_parser('add')
   add_parser.add_argument('-n', '--name', required=True)

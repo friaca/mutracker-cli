@@ -19,6 +19,9 @@ class ArgsAdd():
     self.dt_listened = dt_listened
     self.notes = notes
 
+class ArgsUpdate(ArgsAdd):
+  pass
+
 def main(args):
   ui = Ui()
 
@@ -31,5 +34,8 @@ def main(args):
   elif args.command == 'add':
     add = ArgsAdd(**vars(args))
     ui.add_release(add)
+  elif args.command == 'update':
+    update = ArgsUpdate(**vars(args))
+    ui.update_release(update)
   
   pass

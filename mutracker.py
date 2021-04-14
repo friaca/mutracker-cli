@@ -32,7 +32,17 @@ def entry():
   add_parser.add_argument('-dl', '--date-listened')
   add_parser.add_argument('-nt', '--notes')
 
-  # update_parser = subparsers.add_parser('update')
+
+  update_parser = subparsers.add_parser('update')
+  update_parser.add_argument('-n', '--name')
+  update_parser.add_argument('-a', '--artist')
+  update_parser.add_argument('-g', '--genres', nargs='?')
+  update_parser.add_argument('-dr', '--date-release')
+  update_parser.add_argument('-t', '--type', choices=['album', 'ep'])
+  update_parser.add_argument('-l', '--listened')
+  update_parser.add_argument('-dl', '--date-listened')
+  update_parser.add_argument('-nt', '--notes')
+
 
   # delete_parser = subparsers.add_parser('delete')
 

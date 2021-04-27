@@ -30,7 +30,7 @@ class Release(BaseModel):
     self.id = id or 0
     self.name = name
     self.artist = artist
-    self.genres = genres or []
+    self.genres = genres
     self.dt_release = self.parse_date(dt_release)
     self.type = self.parse_type(type)
     self.status_listened = status_listened

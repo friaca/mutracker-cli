@@ -25,14 +25,14 @@ class ReleaseService():
   def find_release_by_name(self, name: str):
     return self._repository.find(['name'], name)
 
-  def find_release_by_artist(self, artist: List[str]):
-    return self._repository.find(['artist'], join(artist))
+  def find_release_by_artist(self, artist: str):
+    return self._repository.find(['artist'], artist)
   
-  def find_release_by_genre(self, genres: List[str]):
-    return self._repository.find_by_genre(join(genres))
+  def find_release_by_genre(self, genres: str):
+    return self._repository.find_by_genre(genres)
 
   def find_release_default(self, value: str):
-    return self._repository.find(['name', 'artist'], join(value))
+    return self._repository.find(['name', 'artist'], value)
 
   def find_release(self, search_dict: Dict[str, List[str]]):
     COLUMN_MAP = {

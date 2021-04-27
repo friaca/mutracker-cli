@@ -5,11 +5,11 @@ class ArgsList():
     self.where = where
 
 class ArgsFind():
-  def __init__(self, id=None, name=None, artist=None, **kwargs):
-    self.search_dict = self.set_search_dict(id, name, artist)
+  def __init__(self, id=None, name=None, artist=None, genre=None, **kwargs):
+    self.search_dict = self.set_search_dict(id, name, artist, genre)
 
-  def set_search_dict(self, id, name, artist):
-    identity = (('id', id), ('name', name), ('artist', artist))
+  def set_search_dict(self, id, name, artist, genre):
+    identity = (('id', id), ('name', name), ('artist', artist), ('genre', genre))
     return { key : [' '.join(search) for search in value] for (key, value) in identity if value is not None }
 
 class ArgsAdd():

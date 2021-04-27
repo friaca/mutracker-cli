@@ -1,6 +1,5 @@
 import sys
 import functools
-from .utils import join
 from typing import Dict, List
 from .models import Release
 from .repository import ReleaseRepository
@@ -12,11 +11,11 @@ class ReleaseService():
   def list_release(self, where) -> List[Release] or None:
     if where in ['all', 'listened', 'pending']:
       return self._repository.list(where)
-    elif where == 'query':
-      print('Query is not yet supported')
+    elif where in ['query']:
+      print(f'{where} is not yet supported')
       sys.exit(1)
     else:
-      print(f'Option "{where}" not valid for --list')
+      print(f'Option "{where}" not valid for `list`')
       sys.exit(1)
 
   def find_release_by_id(self, id: int):

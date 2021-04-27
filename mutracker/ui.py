@@ -42,9 +42,8 @@ class Ui():
     releases = self._service.list_release(where)
     self.display_table_releases(releases)
 
-  # TODO: Find multiple things, like if I want to find albums by Pink Floyd and The Avalanches
-  def find_releases(self, identifier: str, search_terms: List[str]):
-    releases = self._service.find_release(identifier, search_terms)
+  def find_releases(self, search_dict: Dict[str, List[str]]):
+    releases = self._service.find_release(search_dict)
     self.display_table_releases(releases)
 
   def add_release(self, pseudo_release: Release):

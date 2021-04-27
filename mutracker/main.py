@@ -6,16 +6,11 @@ class ArgsList():
 
 class ArgsFind():
   def __init__(self, id=None, name=None, artist=None, **kwargs):
-    self.identifier = self.set_identifier(id, name, artist)
-    self.search_terms = id or name or artist
+    self.search_dict = self.set_search_dict(id, name, artist)
 
-  def set_identifier(self, id, name, artist):
-    if id is not None:
-      return 'id'
-    elif name is not None:
-      return 'name'
-    elif artist is not None:
-      return 'artist'
+  def set_search_dict(self, id, name, artist):
+    identity = (('id', id), ('name', name), ('artist', artist))
+    return { key : [' '.join(search) for search in value] for (key, value) in identity if value is not None }
 
 class ArgsAdd():
   def __init__(self, name=None, artist=None, genres=None, dt_release=None, type=None, listened=None, dt_listened=None, notes=None, **kwargs):
@@ -39,7 +34,7 @@ def main(args):
     ui.list_releases(list.where)
   elif args.command == 'find':
     find = ArgsFind(**vars(args))
-    ui.find_releases(find.identifier, find.search_terms)
+    ui.find_releases(find.search_dict)
   elif args.command == 'add':
     add = ArgsAdd(**vars(args))
     ui.add_release(add)

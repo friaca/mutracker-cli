@@ -1,6 +1,7 @@
 import sys
+import functools
 from .utils import join
-from typing import List
+from typing import Dict, List
 from .models import Release
 from .repository import ReleaseRepository
 
@@ -21,8 +22,8 @@ class ReleaseService():
   def find_release_by_id(self, id: int):
     return self._repository.find_by_id(id)
 
-  def find_release_by_name(self, name: List[str]):
-    return self._repository.find(['name'], join(name))
+  def find_release_by_name(self, name: str):
+    return self._repository.find(['name'], name)
 
   def find_release_by_artist(self, artist: List[str]):
     return self._repository.find(['artist'], join(artist))
@@ -33,7 +34,7 @@ class ReleaseService():
   def find_release_default(self, value: str):
     return self._repository.find(['name', 'artist'], join(value))
 
-  def find_release(self, by: str, search_terms: List[str]):
+  def find_release(self, search_dict: Dict[str, List[str]]):
     COLUMN_MAP = {
       'id': self.find_release_by_id,
       'name': self.find_release_by_name,
@@ -42,7 +43,16 @@ class ReleaseService():
       None: self.find_release_default,
     }
 
-    return COLUMN_MAP[by](search_terms)
+    def reducer(accumulator, current):
+      key, search_terms = current
+
+      for term in search_terms:
+        accumulator += COLUMN_MAP[key](term)
+
+      return accumulator
+    
+    results = functools.reduce(reducer, search_dict.items(), [])
+    return results
     
   def add_release(self, pseudo_release: Release):
     release = self._repository.add_release(pseudo_release)

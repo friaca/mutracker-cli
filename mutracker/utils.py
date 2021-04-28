@@ -9,6 +9,7 @@ def or_like_clause(columns: List[str]):
   mapped = map(lambda column: f"{column} LIKE ?", columns)
   return ' or '.join(mapped)
 
+# TODO: Melhorar esse método, tá bem feio
 def add_release_dict(pseudo_release: Release):
   genres = []
 

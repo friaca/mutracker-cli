@@ -32,7 +32,7 @@ def entry():
   add_parser.add_argument('-l', '--listened')
   add_parser.add_argument('-dl', '--date-listened')
   add_parser.add_argument('-nt', '--notes')
-
+  # TODO: Add --url option (RYM)
 
   update_parser = subparsers.add_parser('update')
   update_parser.add_argument('-n', '--name')

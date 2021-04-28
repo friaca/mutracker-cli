@@ -46,7 +46,6 @@ class Database:
 def run_migrations(db_path: str):
   db = Database(db_path)
 
-  # TODO: Add dt_create column and set default value to NOW()
   # Releases table
   db.execute("""CREATE TABLE IF NOT EXISTS release (
     id INTEGER PRIMARY KEY,

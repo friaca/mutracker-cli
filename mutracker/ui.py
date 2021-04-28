@@ -33,7 +33,7 @@ class Ui():
   def display_table_releases(self, releases: List[Release]):
     self.display_table(
       {'box': box.SIMPLE_HEAD, 'show_lines': True}, 
-      ['ID', 'Name', 'Artist', 'Genres', 'Release date', 'Type', 'Listened', 'Listened date', 'Notes'], 
+      ['ID', 'Name', 'Artist', 'Genres', 'Release date', 'Type', 'Listened', 'Listened date', 'Notes', 'Reg. date'], 
       {'justify': 'left', 'no_wrap': False},
       map(lambda r: r.get_renderable(), releases)
     )

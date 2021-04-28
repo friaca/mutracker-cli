@@ -26,7 +26,7 @@ class Release(BaseModel):
   # Notes on the release, whatever the user might want to write
   notes: str
 
-  def __init__(self, id, name, artist, dt_release, type, status_listened, dt_listened, notes, genres = None):
+  def __init__(self, id, name, artist, dt_release, type, status_listened, dt_listened, notes, dt_create, genres = None):
     self.id = id or 0
     self.name = name
     self.artist = artist
@@ -36,6 +36,7 @@ class Release(BaseModel):
     self.status_listened = status_listened
     self.dt_listened = self.parse_date(dt_listened)
     self.notes = notes
+    self.dt_create = dt_create
 
   def parse_type(self, type: int):
     if type == 1:
@@ -49,12 +50,15 @@ class Release(BaseModel):
     if date is None: 
       return None
     else:
-      # '31-12-2020' -> [2020, 12, 31]
-      date_to_int_list = map(lambda part: int(part), date.split('-')[::-1])
+      # '2020-12-31' -> [2020, 12, 31]
+      date_to_int_list = map(lambda part: int(part), date.split('-'))
 
       return datetime(*date_to_int_list)
 
   def get_renderable(self):
+    # Fields to hide when rendering table
+    # block_list = ['dt_create']
+
     parse_bool = lambda val: 'Yes' if val == 1 else 'No'
     parse_array = lambda arr: ', '.join(arr)
     format_date = lambda date: date.strftime("%d/%m/%Y")
@@ -69,4 +73,6 @@ class Release(BaseModel):
 
       return str(entry[1])
 
-    return map(mapper, self.__dict__.items())
+    # items = [item for item in self.__dict__.items() if item[0] not in block_list]
+    items = self.__dict__.items()
+    return map(mapper, items)

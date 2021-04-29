@@ -1,7 +1,15 @@
-from .database import config_db, insert_mock_data, run_migrations
-from dotenv import dotenv_values
+from .database import config_db
 import pathlib
 import os
+
+try:
+  from dotenv import dotenv_values
+  env_dict = dotenv_values('.env')
+except ImportError:
+  from dotenv import load_dotenv
+  __env__ = ['ENV', 'MOCK_DATA']
+  load_dotenv('.env')
+  env_dict = { item : os.environ.get(item) for item in __env__ }
 
 DB_NAME = 'mutracker.db'
 
@@ -17,7 +25,7 @@ FULL_DB_PATH = os.path.join(DB_DIR, DB_NAME)
 
 config = { 
   **{ 'DB_PATH': FULL_DB_PATH }, 
-  **dotenv_values('.env') 
+  **env_dict
 }
 
 if not pathlib.Path(DB_DIR).is_dir():

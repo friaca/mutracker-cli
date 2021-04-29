@@ -35,7 +35,7 @@ class Ui():
       {'box': box.SIMPLE_HEAD, 'show_lines': True}, 
       ['ID', 'Name', 'Artist', 'Genres', 'Release date', 'Type', 'Listened', 'Listened date', 'Notes', 'Reg. date'], 
       {'justify': 'left', 'no_wrap': False},
-      map(lambda r: r.get_renderable(), releases)
+      [release.get_renderable() for release in releases]
     )
 
   def list_releases(self, where: str):

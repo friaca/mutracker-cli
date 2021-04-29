@@ -51,7 +51,7 @@ class Release(BaseModel):
       return None
     else:
       # '2020-12-31' -> [2020, 12, 31]
-      date_to_int_list = map(lambda part: int(part), date.split('-'))
+      date_to_int_list = [int(part) for part in date.split('-')]
 
       return datetime(*date_to_int_list)
 
@@ -75,4 +75,4 @@ class Release(BaseModel):
 
     # items = [item for item in self.__dict__.items() if item[0] not in block_list]
     items = self.__dict__.items()
-    return map(mapper, items)
+    return [mapper(entry) for entry in items]

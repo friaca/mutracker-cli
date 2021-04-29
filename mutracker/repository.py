@@ -9,7 +9,7 @@ class ReleaseRepository():
     self._database = Database(config['DB_PATH'])
 
   def map_release(self, query_results):
-    releases = list(map(lambda r: Release(*r), query_results))
+    releases = [Release(*release) for release in query_results]
 
     for release in releases:
       release.genres = self.get_genres(release.id)
@@ -18,7 +18,7 @@ class ReleaseRepository():
 
   def get_genres(self, id):
     sql = 'SELECT name FROM genre WHERE id_release = ?'
-    return list(map(lambda name_tuple: name_tuple[0], self._database.query(sql, (id,))))
+    return [name_tuple[0] for name_tuple in self._database.query(sql, (id,))]
 
   def list(self, which: str):
     sql = ['SELECT * FROM release']
@@ -58,7 +58,7 @@ class ReleaseRepository():
     id = self._database.query("SELECT last_insert_rowid()")[0][0]
 
     if len(dict['genres']) > 0 and dict['genres'][0] is not None:
-      values_clause = join(list(map(lambda genre: f"('{genre.strip()}', {id})", dict['genres'])), ', ')
+      values_clause = join([f"('{genre.strip()}', {id})" for genre in dict['genres']], ',')
       insert_genre_query = f"INSERT INTO genre (name, id_release) VALUES {values_clause}"
       self._database.query(insert_genre_query)
     

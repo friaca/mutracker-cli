@@ -17,11 +17,10 @@ def entry():
   list_parser.add_argument('--where', nargs='?', const='all', default='all')
 
   find_parser = subparsers.add_parser('find')
-  find_group = find_parser.add_mutually_exclusive_group(required=True)
-  find_group.add_argument('-i', '--id', nargs='+', action='append')
-  find_group.add_argument('-n', '--name', nargs='+', action='append')
-  find_group.add_argument('-a', '--artist', nargs='+', action='append')
-  find_group.add_argument('-g', '--genre', nargs='+', action='append')
+  find_parser.add_argument('-i', '--id', nargs='+', action='append')
+  find_parser.add_argument('-n', '--name', nargs='+', action='append')
+  find_parser.add_argument('-a', '--artist', nargs='+', action='append')
+  find_parser.add_argument('-g', '--genre', nargs='+', action='append')
 
   add_parser = subparsers.add_parser('add')
   add_parser.add_argument('-n', '--name', required=True)

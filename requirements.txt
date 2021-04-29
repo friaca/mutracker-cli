@@ -1,2 +1,2 @@
+python-dotenv>=0.14.0
 rich>=9.13.0
-python-env>=0.14.0

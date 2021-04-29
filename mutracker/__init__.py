@@ -7,7 +7,7 @@ try:
   env_dict = dotenv_values('.env')
 except ImportError:
   from dotenv import load_dotenv
-  __env__ = ['ENV', 'MOCK_DATA']
+  __env__ = ['ENV', 'MOCK_DATA', 'DB_PATH']
   load_dotenv('.env')
   env_dict = { item : os.environ.get(item) for item in __env__ }
 

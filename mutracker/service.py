@@ -3,6 +3,7 @@ import functools
 from typing import Dict, List
 from .models import Release
 from .repository import ReleaseRepository
+from .scraper import fetch_release
 
 class ReleaseService():
   def __init__(self):
@@ -54,7 +55,12 @@ class ReleaseService():
     return results
     
   def add_release(self, pseudo_release: Release):
-    release = self._repository.add_release(pseudo_release)
+    if pseudo_release.url is not None:
+      # TODO: Sanitize the scraped release
+      release = fetch_release(url = pseudo_release.url)
+    else:
+      release = self._repository.add_release(pseudo_release)
+
     return release
 
   def delete_release(argv):

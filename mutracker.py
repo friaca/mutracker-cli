@@ -23,15 +23,16 @@ def entry():
   find_parser.add_argument('-g', '--genre', nargs='+', action='append')
 
   add_parser = subparsers.add_parser('add')
-  add_parser.add_argument('-n', '--name', required=True)
-  add_parser.add_argument('-a', '--artist', required=True)
+  # TODO: Make URL and manual adding mutually exclusive
+  add_parser.add_argument('-u', '--url')
+  add_parser.add_argument('-n', '--name')
+  add_parser.add_argument('-a', '--artist')
   add_parser.add_argument('-g', '--genres', nargs='?')
   add_parser.add_argument('-dr', '--date-release')
   add_parser.add_argument('-t', '--type', choices=['album', 'ep'], default='album')
   add_parser.add_argument('-l', '--listened')
   add_parser.add_argument('-dl', '--date-listened')
   add_parser.add_argument('-nt', '--notes')
-  # TODO: Add --url option (RYM)
 
   update_parser = subparsers.add_parser('update')
   update_parser.add_argument('-n', '--name')

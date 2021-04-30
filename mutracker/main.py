@@ -13,7 +13,8 @@ class ArgsFind():
     return { key : [' '.join(search) for search in value] for (key, value) in identity if value is not None }
 
 class ArgsAdd():
-  def __init__(self, name=None, artist=None, genres=None, dt_release=None, type=None, listened=None, dt_listened=None, notes=None, **kwargs):
+  def __init__(self, url=None, name=None, artist=None, genres=None, dt_release=None, type=None, listened=None, dt_listened=None, notes=None, **kwargs):
+    self.url = url
     self.name = name
     self.artist = artist
     self.genres = genres.split(',') if genres is not None and ',' in genres else [genres]

@@ -45,6 +45,21 @@ USER_AGENTS = [
   'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-US) AppleWebKit/530.5 (KHTML, like Gecko) Chrome/ Safari/530.5',
 ]
 
+MONTHS = {
+  'January': '01',
+  'February': '02',
+  'March': '03',
+  'April': '04',
+  'May': '05',
+  'June': '06',
+  'July': '07',
+  'August': '08',
+  'September': '09',
+  'October': '10',
+  'November': '11',
+  'December': '12'
+}
+
 def join(words: List[Any], joiner=' '):
   return joiner.join([str(word) for word in words])
 
@@ -60,7 +75,7 @@ def add_release_dict(pseudo_release: Release):
     genres = pseudo_release.genres
     pseudo_release.genres = None
   
-  populated_fields = list(filter(lambda prop: prop[1] is not None, pseudo_release.__dict__.items()))
+  populated_fields =  [prop for prop in pseudo_release.__dict__.items() if prop[1] is not None] 
   columns = [entry[0] for entry in populated_fields]
   # TODO: Lidar com outros tipos de dado e não tratar tudo como string
   values = [f"'{entry[1]}'" for entry in populated_fields]

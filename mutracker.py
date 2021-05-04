@@ -27,7 +27,7 @@ def entry():
   add_parser.add_argument('-u', '--url')
   add_parser.add_argument('-n', '--name')
   add_parser.add_argument('-a', '--artist')
-  add_parser.add_argument('-g', '--genres', nargs='?')
+  add_parser.add_argument('-g', '--genre', nargs='?')
   add_parser.add_argument('-dr', '--date-release')
   add_parser.add_argument('-t', '--type', choices=['album', 'ep'], default='album')
   add_parser.add_argument('-l', '--listened')

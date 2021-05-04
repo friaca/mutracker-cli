@@ -1,5 +1,5 @@
 from .ui import Ui
-
+from .scraper import fetch_release
 class ArgsList():
   def __init__(self, where=None, **kwargs):
     self.where = where
@@ -19,7 +19,7 @@ class ArgsAdd():
     self.artist = artist
     self.genres = genres.split(',') if genres is not None and ',' in genres else [genres]
     self.dt_release = dt_release
-    self.type = {'album': 1,'ep': 2}[type]
+    self.type = {'album': 1,'ep': 2}[type.lower()]
     self.listened = listened
     self.dt_listened = dt_listened
     self.notes = notes
@@ -37,7 +37,10 @@ def main(args):
     find = ArgsFind(**vars(args))
     ui.find_releases(find.search_dict)
   elif args.command == 'add':
-    add = ArgsAdd(**vars(args))
+    if args.url is not None:
+        add = ArgsAdd(**fetch_release(url=args.url))
+    else:
+      add = ArgsAdd(**vars(args))
     ui.add_release(add)
   elif args.command == 'update':
     update = ArgsUpdate(**vars(args))

@@ -55,12 +55,7 @@ class ReleaseService():
     return results
     
   def add_release(self, pseudo_release: Release):
-    if pseudo_release.url is not None:
-      # TODO: Sanitize the scraped release
-      release = fetch_release(url = pseudo_release.url)
-    else:
-      release = self._repository.add_release(pseudo_release)
-
+    release = self._repository.add_release(pseudo_release)
     return release
 
   def delete_release(argv):

@@ -38,7 +38,7 @@ def main(args):
     ui.find_releases(find.search_dict)
   elif args.command == 'add':
     if args.url is not None:
-        add = ArgsAdd(**fetch_release(url=args.url))
+      add = ArgsAdd(**fetch_release(url=args.url))
     else:
       add = ArgsAdd(**vars(args))
     ui.add_release(add)

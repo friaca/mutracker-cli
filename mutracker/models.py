@@ -27,7 +27,7 @@ class Release(BaseModel):
   notes: str
 
   def __init__(self, id, name, artist, dt_release, type, status_listened, dt_listened, notes, dt_create, genres = None):
-    self.id = id or 0
+    self.id = id
     self.name = name
     self.artist = artist
     self.genres = genres
@@ -53,7 +53,7 @@ class Release(BaseModel):
       # '2020-12-31' -> [2020, 12, 31]
       date_to_int_list = [int(part) for part in date.split('-')]
 
-      return datetime(*date_to_int_list)
+      return datetime.date(datetime(*date_to_int_list))
 
   def get_renderable(self):
     # Fields to hide when rendering table

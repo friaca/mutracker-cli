@@ -8,10 +8,24 @@ from .utils import USER_AGENTS, MONTHS
 
 console = Console()
 
+def is_valid_url(url: str):
+  DOMAINS = ['rateyourmusic.com']
+  
+  for domain in DOMAINS:
+    if domain in url:
+      return True
+
+  return False
+
 def fetch_release(url: str = None, stream: str = None):
+
   if stream is not None:
     content = stream
   elif url is not None:
+    if not is_valid_url(url):
+      print('Invalid URL')
+      system.exit(1)
+    
     with console.status("[bold green]Downloading...") as status:
       headers = {
         'user-agent': random.choice(USER_AGENTS),

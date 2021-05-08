@@ -1,6 +1,7 @@
 from .database import config_db
 import pathlib
 import os
+import sys
 
 try:
   from dotenv import dotenv_values
@@ -19,6 +20,9 @@ if os.name == 'nt':
 elif os.name == 'posix':
   DB_PATH = os.getenv('HOME')
   FOLDER_NAME = '.mutracker'
+ else:
+  print('Oops, not using Windows nor Unix-based? Sorry...')
+  sys.exit(1)
 
 DB_DIR = os.path.join(DB_PATH, FOLDER_NAME)
 FULL_DB_PATH = os.path.join(DB_DIR, DB_NAME)

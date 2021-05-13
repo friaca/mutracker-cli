@@ -32,6 +32,6 @@ config = {
   **env_dict
 }
 
-if not pathlib.Path(DB_DIR).is_dir():
+if not pathlib.Path(FULL_DB_PATH).is_file():
   pathlib.Path(DB_DIR).mkdir(parents=True)
   config_db(config)

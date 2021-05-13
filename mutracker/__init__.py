@@ -20,7 +20,7 @@ if os.name == 'nt':
 elif os.name == 'posix':
   DB_PATH = os.getenv('HOME')
   FOLDER_NAME = '.mutracker'
- else:
+else:
   print('Oops, not using Windows nor Unix-based? Sorry...')
   sys.exit(1)
 

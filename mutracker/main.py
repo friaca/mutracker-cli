@@ -1,5 +1,10 @@
 from .ui import Ui
+from .service import ReleaseService
 from .scraper import fetch_release
+
+def chain_args():
+  pass
+
 class ArgsList():
   def __init__(self, where=None, **kwargs):
     self.where = where
@@ -29,21 +34,22 @@ class ArgsUpdate(ArgsAdd):
 
 def main(args):
   ui = Ui()
+  service = ReleaseService()
 
   if args.command == 'list':
     list = ArgsList(**vars(args))
-    ui.list_releases(list.where)
+    releases = service.list_release(list.where)
   elif args.command == 'find':
     find = ArgsFind(**vars(args))
-    ui.find_releases(find.search_dict)
+    releases = service.find_release(find.search_dict)
   elif args.command == 'add':
     if args.url is not None:
       add = ArgsAdd(**fetch_release(url=args.url))
     else:
       add = ArgsAdd(**vars(args))
-    ui.add_release(add)
+    releases = service.add_release(add)
   elif args.command == 'update':
     update = ArgsUpdate(**vars(args))
-    ui.update_release(update)
+    releases = service.update_release(update)
   
-  pass
+  ui.display_table_releases(releases)

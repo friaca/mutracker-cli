@@ -8,7 +8,6 @@ from .service import ReleaseService
 class Ui():
   def __init__(self):
     self._console = Console(color_system="auto")
-    self._service = ReleaseService()
   
   def ask(self, question: str):
     answer = None
@@ -37,18 +36,3 @@ class Ui():
       {'justify': 'left', 'no_wrap': False},
       [release.get_renderable() for release in releases]
     )
-
-  def list_releases(self, where: str):
-    releases = self._service.list_release(where)
-    self.display_table_releases(releases)
-
-  def find_releases(self, search_dict: Dict[str, List[str]]):
-    releases = self._service.find_release(search_dict)
-    self.display_table_releases(releases)
-
-  def add_release(self, pseudo_release: Release):
-    release = self._service.add_release(pseudo_release)
-    self.display_table_releases(release)
-
-  def update_release(self, pseudo_release: Release):
-    pass

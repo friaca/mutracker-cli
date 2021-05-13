@@ -23,7 +23,6 @@ def entry():
   find_parser.add_argument('-g', '--genre', nargs='+', action='append')
 
   add_parser = subparsers.add_parser('add')
-  # TODO: Make URL and manual adding mutually exclusive
   add_parser.add_argument('-u', '--url')
   add_parser.add_argument('-n', '--name')
   add_parser.add_argument('-a', '--artist')

@@ -71,11 +71,11 @@ def or_like_clause(columns: List[str]):
 def add_release_dict(pseudo_release: Release):
   genres = []
 
-  if pseudo_release.genres is not None:
+  if pseudo_release.genres:
     genres = pseudo_release.genres
     pseudo_release.genres = None
   
-  populated_fields =  [prop for prop in pseudo_release.__dict__.items() if prop[1] is not None] 
+  populated_fields =  [prop for prop in pseudo_release.__dict__.items() if prop[1] ] 
   columns = [entry[0] for entry in populated_fields]
   # TODO: Lidar com outros tipos de dado e não tratar tudo como string
   values = [f"'{entry[1]}'" for entry in populated_fields]

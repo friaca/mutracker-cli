@@ -19,9 +19,9 @@ def is_valid_url(url: str):
 
 def fetch_release(url: str = None, stream: str = None):
 
-  if stream is not None:
+  if stream:
     content = stream
-  elif url is not None:
+  elif url:
     if not is_valid_url(url):
       print('Invalid URL')
       system.exit(1)

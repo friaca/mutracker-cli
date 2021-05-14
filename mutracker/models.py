@@ -68,7 +68,7 @@ class Release(BaseModel):
         return parse_bool(entry[1])
       if entry[0] in ['genres']:
         return parse_array(entry[1])
-      if entry[0] in ['dt_release', 'dt_listened'] and entry[1] is not None:
+      if entry[0] in ['dt_release', 'dt_listened'] and entry[1]:
         return format_date(entry[1])
 
       return str(entry[1])

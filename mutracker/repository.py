@@ -57,7 +57,7 @@ class ReleaseRepository():
     # Isso retorna uma tupla dentro de uma lista
     id = self._database.query("SELECT last_insert_rowid()")[0][0]
 
-    if len(dict['genres']) > 0 and dict['genres'][0] is not None:
+    if len(dict['genres']) > 0 and dict['genres'][0]:
       values_clause = join([f"('{genre.strip()}', {id})" for genre in dict['genres']], ',')
       insert_genre_query = f"INSERT INTO genre (name, id_release) VALUES {values_clause}"
       self._database.query(insert_genre_query)

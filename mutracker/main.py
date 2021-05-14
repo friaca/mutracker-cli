@@ -15,14 +15,14 @@ class ArgsFind():
 
   def set_search_dict(self, id, name, artist, genre):
     identity = (('id', id), ('name', name), ('artist', artist), ('genre', genre))
-    return { key : [' '.join(search) for search in value] for (key, value) in identity if value is not None }
+    return { key : [' '.join(search) for search in value] for (key, value) in identity if value }
 
 class ArgsAdd():
   def __init__(self, url=None, name=None, artist=None, genres=None, dt_release=None, type=None, listened=None, dt_listened=None, notes=None, **kwargs):
     self.url = url
     self.name = name
     self.artist = artist
-    self.genres = genres.split(',') if genres is not None and ',' in genres else [genres]
+    self.genres = genres.split(',') if genres and ',' in genres else [genres]
     self.dt_release = dt_release
     self.type = {'album': 1,'ep': 2}[type.lower()]
     self.listened = listened
@@ -43,7 +43,7 @@ def main(args):
     find = ArgsFind(**vars(args))
     releases = service.find_release(find.search_dict)
   elif args.command == 'add':
-    if args.url is not None:
+    if args.url:
       add = ArgsAdd(**fetch_release(url=args.url))
     else:
       add = ArgsAdd(**vars(args))

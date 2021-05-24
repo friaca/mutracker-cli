@@ -36,7 +36,19 @@ class Release(BaseModel):
     self.status_listened = status_listened
     self.dt_listened = self.parse_date(dt_listened)
     self.notes = notes
-    self.dt_create = dt_create
+    self.dt_create = self.parse_date(dt_create)
+
+  def __add__(self, other):
+    self.name = other.name or self.name
+    self.artist = other.artist or self.artist
+    self.genres = other.genres or self.genres
+    self.dt_release = other.dt_release or self.dt_release
+    self.type = other.type or self.type
+    self.status_listened = other.status_listened or self.status_listened
+    self.dt_listened = other.dt_listened or self.dt_listened
+    self.notes = other.notes or self.notes
+
+    return self
 
   def parse_type(self, type: int):
     if type == 1:
@@ -68,7 +80,7 @@ class Release(BaseModel):
         return parse_bool(entry[1])
       if entry[0] in ['genres']:
         return parse_array(entry[1])
-      if entry[0] in ['dt_release', 'dt_listened'] and entry[1]:
+      if entry[0] in ['dt_release', 'dt_listened', 'dt_create'] and entry[1]:
         return format_date(entry[1])
 
       return str(entry[1])

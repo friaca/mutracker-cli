@@ -18,19 +18,21 @@ class ArgsFind():
     return { key : [' '.join(search) for search in value] for (key, value) in identity if value }
 
 class ArgsAdd():
-  def __init__(self, url=None, name=None, artist=None, genres=None, dt_release=None, type=None, listened=None, dt_listened=None, notes=None, **kwargs):
+  def __init__(self, url=None, name=None, artist=None, genres=None, dt_release=None, type=None, status_listened=None, dt_listened=None, notes=None, **kwargs):
     self.url = url
     self.name = name
     self.artist = artist
     self.genres = genres.split(',') if genres and ',' in genres else [genres]
     self.dt_release = dt_release
     self.type = {'album': 1,'ep': 2}[type.lower()]
-    self.listened = listened
+    self.status_listened = status_listened
     self.dt_listened = dt_listened
     self.notes = notes
 
 class ArgsUpdate(ArgsAdd):
-  pass
+  def __init__(self, id=None, **kwargs):
+    super().__init__(**kwargs)
+    self.id = id
 
 def main(args):
   ui = Ui()

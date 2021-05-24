@@ -58,8 +58,12 @@ class ReleaseService():
     release = self._repository.add_release(pseudo_release)
     return release
 
-  def delete_release(argv):
-    pass
+  def update_release(self, pseudo_release: Release):
+    old_release, = self.find_release_by_id(pseudo_release.id)
+    old_genres = old_release.genres
+    updated_release = old_release + pseudo_release
+    release = self._repository.update_release(updated_release, set(old_genres) != set(updated_release.genres))
+    return release
 
-  def update_release(argv):
+  def delete_release(argv):
     pass

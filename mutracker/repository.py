@@ -70,4 +70,20 @@ class ReleaseRepository():
     self._database.commit()
     return self.find_by_id(id_release)
 
+  def update_release(self, pseudo_release: Release, update_genres: bool):
+    release_query = """UPDATE release 
+        SET name = :name, artist = :artist, dt_release = :dt_release, type = :type, status_listened = :status_listened, dt_listened = :dt_listened, notes = :notes
+        WHERE id = :id"""
 
+    self._database.execute(release_query, pseudo_release.__dict__)
+
+    if update_genres:
+      clear_genres_query = "DELETE FROM genre WHERE id_release = ?"
+      self._database.execute(clear_genres_query, (pseudo_release.id,))
+
+      genre_query_values = join([f"(?, {pseudo_release.id})"] * len(pseudo_release.genres), ', ')
+      genre_query = f"INSERT INTO genre (name, id_release) VALUES {genre_query_values}"
+      self._database.execute(genre_query, pseudo_release.genres)
+
+    self._database.commit()
+    return self.find_by_id(pseudo_release.id)

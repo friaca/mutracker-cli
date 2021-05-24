@@ -1,5 +1,5 @@
 from typing import List
-from .utils import join, or_like_clause, add_release_dict
+from .utils import join, or_like_clause
 from .models import Release
 from .database import Database
 from . import config
@@ -69,3 +69,5 @@ class ReleaseRepository():
 
     self._database.commit()
     return self.find_by_id(id_release)
+
+

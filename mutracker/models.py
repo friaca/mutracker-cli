@@ -38,6 +38,7 @@ class Release(BaseModel):
     self.notes = notes
     self.dt_create = self.parse_date(dt_create)
 
+  # TODO: Não modificar o self, retornar um Release novo
   def __add__(self, other):
     self.name = other.name or self.name
     self.artist = other.artist or self.artist

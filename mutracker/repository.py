@@ -52,7 +52,7 @@ class ReleaseRepository():
   def add_release(self, pseudo_release: Release):
     genres = pseudo_release.genres if pseudo_release.genres else []
 
-    fields = [(key, value) for key, value in pseudo_release.__dict__.items() if value and key not in ['genres']]
+    fields = [(key, value) for key, value in pseudo_release.__dict__.items() if key not in ['genres'] and value]
     columns = [key for key, value in fields]
     values = [value for key, value in fields]
 

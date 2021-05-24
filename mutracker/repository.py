@@ -17,29 +17,29 @@ class ReleaseRepository():
     return releases
 
   def get_genres(self, id):
-    sql = 'SELECT name FROM genre WHERE id_release = ?'
-    return [name_tuple[0] for name_tuple in self._database.query(sql, (id,))]
+    query = 'SELECT name FROM genre WHERE id_release = ?'
+    return [name_tuple[0] for name_tuple in self._database.query(query, (id,))]
 
   def list(self, which: str):
-    sql = ['SELECT * FROM release']
+    query = ['SELECT * FROM release']
 
     if which == 'listened':
-      sql += ['WHERE status_listened = 1']
+      query += ['WHERE status_listened = 1']
     elif which == 'pending':
-      sql += ['WHERE status_listened = 0']
+      query += ['WHERE status_listened = 0']
     
-    return self.map_release(self._database.query(join(sql)))
+    return self.map_release(self._database.query(join(query)))
 
   def find(self, columns: List[str], value: str):
     or_like = or_like_clause(columns)
-    sql = join(['SELECT * FROM release', 'WHERE', or_like])
-    releases = self.map_release(self._database.query(sql, (f"%{value}%",) * len(columns)))
+    query = join(['SELECT * FROM release', 'WHERE', or_like])
+    releases = self.map_release(self._database.query(query, (f"%{value}%",) * len(columns)))
     
     return releases
 
   def find_by_id(self, id: int):
-    sql = 'SELECT * FROM release WHERE id = ?'
-    return self.map_release(self._database.query(sql, (id,)))
+    query = 'SELECT * FROM release WHERE id = ?'
+    return self.map_release(self._database.query(query, (id,)))
 
   def find_by_genre(self, genre: str):
     sql = """SELECT * FROM release WHERE id IN 

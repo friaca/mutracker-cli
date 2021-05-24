@@ -50,18 +50,22 @@ class ReleaseRepository():
     return releases
 
   def add_release(self, pseudo_release: Release):
-    dict = add_release_dict(pseudo_release)
-    insert_release_query = f"INSERT INTO release ({join(dict['release'][0], ',')}) VALUES ({join(dict['release'][1], ',')})"
-    self._database.query(insert_release_query)
+    genres = pseudo_release.genres if pseudo_release.genres else []
+
+    fields = [(key, value) for key, value in pseudo_release.__dict__.items() if value and key not in ['genres']]
+    columns = [key for key, value in fields]
+    values = [value for key, value in fields]
+
+    release_query = f"INSERT INTO release ({join(columns, ',')}) VALUES ({join(['?'] * len(values), ',')})"
+    self._database.execute(release_query, values)
 
     # Isso retorna uma tupla dentro de uma lista
-    id = self._database.query("SELECT last_insert_rowid()")[0][0]
+    id_release = self._database.query("SELECT last_insert_rowid()")[0][0]
 
-    if len(dict['genres']) > 0 and dict['genres'][0]:
-      values_clause = join([f"('{genre.strip()}', {id})" for genre in dict['genres']], ',')
-      insert_genre_query = f"INSERT INTO genre (name, id_release) VALUES {values_clause}"
-      self._database.query(insert_genre_query)
-    
+    if genres:
+      genre_query_values = join([f"(?, {id_release})"] * len(genres), ', ')
+      genres_query = f"INSERT INTO genre (name, id_release) VALUES {genre_query_values}"
+      self._database.execute(genres_query, genres)
+
     self._database.commit()
-
-    return self.find_by_id(id)
+    return self.find_by_id(id_release)

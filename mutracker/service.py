@@ -3,7 +3,6 @@ import functools
 from typing import Dict, List
 from .models import Release
 from .repository import ReleaseRepository
-from .scraper import fetch_release
 
 class ReleaseService():
   def __init__(self):

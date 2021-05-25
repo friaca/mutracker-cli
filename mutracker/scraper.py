@@ -3,7 +3,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from rich.console import Console
-from os import system
+import sys
 from .utils import USER_AGENTS, MONTHS
 
 console = Console()
@@ -24,7 +24,7 @@ def fetch_release(url: str = None, stream: str = None):
   elif url:
     if not is_valid_url(url):
       print('Invalid URL')
-      system.exit(1)
+      sys.exit(1)
     
     with console.status("[bold green]Downloading...") as status:
       headers = {
@@ -42,7 +42,7 @@ def fetch_release(url: str = None, stream: str = None):
       content = response.content
   else:
     print('No URL or stream provided!')
-    system.exit(1)
+    sys.exit(1)
 
   with console.status("[bold green]Processing...") as status:
     def select_name(dom):

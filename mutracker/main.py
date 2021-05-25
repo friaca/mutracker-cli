@@ -1,3 +1,4 @@
+import sys
 from .ui import Ui
 from .service import ReleaseService
 from .scraper import fetch_release
@@ -50,5 +51,8 @@ def main(args):
   elif args.command == 'update':
     update = ArgsUpdate(**vars(args))
     releases = service.update_release(update)
+  else:
+    print('bruh')
+    sys.exit(1)
   
   ui.display_table_releases(releases)

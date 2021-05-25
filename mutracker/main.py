@@ -2,9 +2,6 @@ from .ui import Ui
 from .service import ReleaseService
 from .scraper import fetch_release
 
-def chain_args():
-  pass
-
 class ArgsList():
   def __init__(self, where=None, **kwargs):
     self.where = where

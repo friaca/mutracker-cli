@@ -3,17 +3,26 @@ from typing import Dict, List
 from rich import box
 from rich.console import Console
 from rich.table import Table
-from .service import ReleaseService
 
 class Ui():
   def __init__(self):
     self._console = Console(color_system="auto")
+
+  def print(self, message: str, status: str = 'info'):
+    color = {
+      'info': 'bold white',
+      'success': 'bold green',
+      'warninng': 'bold yellow'
+    }[status]
+
+    self._console.print(message, style=color)
+    pass
   
   def ask(self, question: str):
     answer = None
 
     while answer == None:
-      answer = input(f'> {question}:')
+      answer = input(f'> {question} ')
     
     return answer
 

@@ -12,7 +12,8 @@ class Ui():
     color = {
       'info': 'bold white',
       'success': 'bold green',
-      'warninng': 'bold yellow'
+      'warning': 'bold yellow',
+      'error': 'bold red'
     }[status]
 
     self._console.print(message, style=color)

@@ -51,6 +51,17 @@ def main(args):
   elif args.command == 'update':
     update = ArgsUpdate(**vars(args))
     releases = service.update_release(update)
+  elif args.command == 'delete':
+    find = ArgsFind(**vars(args))
+    releases = service.find_release(find.search_dict)
+    ui.display_table_releases(releases)
+
+    answer = ui.ask(f'Are you sure you want to delete these releases? (Y/N)')
+    if answer in 'Yy':
+      # ...
+      pass
+
+    return
   else:
     print('bruh')
     sys.exit(1)

@@ -44,11 +44,12 @@ def entry():
   update_parser.add_argument('-dl', '--date-listened', dest='dt_listened')
   update_parser.add_argument('-nt', '--notes')
 
-
-  # delete_parser = subparsers.add_parser('delete')
+  delete_parser = subparsers.add_parser('delete')
+  delete_parser.add_argument('-i', '--id', nargs='+', action='append')
+  delete_parser.add_argument('-n', '--name', nargs='+', action='append')
+  delete_parser.add_argument('-a', '--artist', nargs='+', action='append')
 
   args = parser.parse_args()
-
   main(args)
 
 if __name__ == '__main__':

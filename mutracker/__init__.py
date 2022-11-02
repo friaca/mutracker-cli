@@ -32,6 +32,10 @@ config = {
   **env_dict
 }
 
+DB_FOLDER = os.path.dirname(os.path.abspath(config["DB_PATH"]))
+
+if not pathlib.Path(DB_FOLDER).is_dir():
+  pathlib.Path(DB_FOLDER).mkdir(parents=True)
+
 if not pathlib.Path(config["DB_PATH"]).is_file():
-  pathlib.Path(os.path.dirname(os.path.abspath(config["DB_PATH"]))).mkdir(parents=True)
   config_db(config)
